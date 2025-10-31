@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Body Shop Korea - 자연주의 뷰티 브랜드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="top-banner">
+            🌿 지금 가입하고 첫 구매 시 15% 할인 혜택을 받으세요!
+        </div>
+        <div class="header-main">
+            <a href="index.html" class="logo">THE BODY SHOP</a>
+            <nav>
+                <a href="#gifts">GIFTS</a>
+                <a href="#face">FACE</a>
+                <a href="#body">BODY</a>
+                <a href="#fragrance">FRAGRANCE</a>
+                <a href="#hair">HAIR</a>
+                <a href="about.html">ABOUT US</a>
+            </nav>
+            <div class="header-icons">
+                <a href="#search">🔍</a>
+                <a href="#account">👤</a>
+                <a href="#cart">🛒</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Slider -->
+        <section class="hero-slider">
+            <div class="slide slide1 active">
+                <div class="slide-bg"></div>
+                <div class="slide-content">
+                    <h2>자연이 주는 아름다움</h2>
+                    <p>천연 성분으로 피부를 케어하는 친환경 뷰티 브랜드</p>
+                    <a href="#" class="cta-button">지금 쇼핑하기</a>
+                </div>
+            </div>
+            <div class="slide slide2">
+                <div class="slide-bg"></div>
+                <div class="slide-content">
+                    <h2>신제품 출시</h2>
+                    <p>새로운 비타민 C 글로우 부스터 컬렉션을 만나보세요</p>
+                    <a href="#" class="cta-button">자세히 보기</a>
+                </div>
+            </div>
+            <div class="slide slide3">
+                <div class="slide-bg"></div>
+                <div class="slide-content">
+                    <h2>지속 가능한 뷰티</h2>
+                    <p>동물실험 반대, 공정무역, 환경 보호를 실천합니다</p>
+                    <a href="about.html" class="cta-button">우리의 가치 알아보기</a>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <button class="slider-arrow prev" onclick="changeSlide(-1)">‹</button>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+                <button class="slider-arrow next" onclick="changeSlide(1)">›</button>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="featured-categories" id="categories">
+            <h2 class="section-title">인기 카테고리</h2>
+            <div class="categories-grid">
+                <div class="category-card gifts" id="gifts">
+                    <div class="category-info">
+                        <h3>GIFTS</h3>
+                        <p>특별한 선물</p>
+                    </div>
+                </div>
+                <div class="category-card face" id="face">
+                    <div class="category-info">
+                        <h3>FACE</h3>
+                        <p>페이스 케어</p>
+                    </div>
+                </div>
+                <div class="category-card body" id="body">
+                    <div class="category-info">
+                        <h3>BODY</h3>
+                        <p>바디 케어</p>
+                    </div>
+                </div>
+                <div class="category-card fragrance" id="fragrance">
+                    <div class="category-info">
+                        <h3>FRAGRANCE</h3>
+                        <p>향기로운 하루</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="values-container">
+                <h2 class="section-title">우리의 약속</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🐰</div>
+                        <h3>동물실험 반대</h3>
+                        <p>1989년부터 동물실험을 하지 않으며, 동물실험을 하는 공급업체와도 거래하지 않습니다.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3>공정무역</h3>
+                        <p>지역 사회와 함께 성장하며, 공정한 거래를 통해 생산자들을 지원합니다.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌍</div>
+                        <h3>환경 보호</h3>
+                        <p>재활용 가능한 패키징을 사용하고, 지속 가능한 방식으로 원료를 조달합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>THE BODY SHOP</h4>
+                <p>
+                    1976년부터 자연과 사람, 지구를 생각하는 윤리적 뷰티 브랜드입니다. 
+                    우리는 아름다움이 자연에서 시작된다고 믿습니다.
+                </p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📺</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>고객 서비스</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">배송 정보</a></li>
+                    <li><a href="#">반품 및 교환</a></li>
+                    <li><a href="#">1:1 문의</a></li>
+                    <li><a href="#">매장 안내</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>쇼핑 정보</h4>
+                <ul>
+                    <li><a href="#">회원 혜택</a></li>
+                    <li><a href="#">이벤트</a></li>
+                    <li><a href="#">기프트 카드</a></li>
+                    <li><a href="#">멤버십</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>브랜드</h4>
+                <ul>
+                    <li><a href="about.html">브랜드 스토리</a></li>
+                    <li><a href="about.html#values">우리의 가치</a></li>
+                    <li><a href="#">지속 가능성</a></li>
+                    <li><a href="#">캠페인</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Body Shop Korea. All Rights Reserved. | 개인정보처리방침 | 이용약관</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

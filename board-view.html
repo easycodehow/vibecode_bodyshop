@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세 - The Body Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/board.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header style="background: #00814D; color: white; padding: 20px; position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="margin: 0;">
+                <a href="index.html" style="color: white; text-decoration: none;">The Body Shop</a>
+            </h2>
+            <div id="auth-status"></div>
+        </div>
+    </header>
+
+    <div class="board-container">
+        <div id="post-detail" class="post-detail">
+            <p style="text-align: center; padding: 40px;">게시글을 불러오는 중...</p>
+        </div>
+    </div>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/board.js"></script>
+
+    <script>
+        // 페이지 로드 시 게시글 불러오기
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            if (!postId) {
+                alert('잘못된 접근입니다.');
+                window.location.href = 'board.html';
+                return;
+            }
+
+            loadPost(postId);
+        });
+    </script>
+</body>
+</html>

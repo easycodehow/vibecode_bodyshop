@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기 - The Body Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/board.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header style="background: #00814D; color: white; padding: 20px; position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="margin: 0;">
+                <a href="index.html" style="color: white; text-decoration: none;">The Body Shop</a>
+            </h2>
+            <div id="auth-status"></div>
+        </div>
+    </header>
+
+    <div class="board-container">
+        <div class="board-header">
+            <h1 id="page-title">글쓰기</h1>
+        </div>
+
+        <form class="write-form" onsubmit="submitPost(event)">
+            <div class="form-group">
+                <label for="post-title">제목</label>
+                <input type="text" id="post-title" placeholder="제목을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="post-content">내용</label>
+                <textarea id="post-content" placeholder="내용을 입력하세요" required></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" onclick="window.location.href='board.html'" class="btn-secondary">취소</button>
+                <button type="submit" class="btn-primary" id="submit-btn">등록</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/board.js"></script>
+
+    <script>
+        let editMode = false;
+        let editPostId = null;
+
+        // 페이지 로드 시 로그인 체크 및 수정 모드 확인
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 로그인 체크
+            const user = await getCurrentUser();
+            if (!user) {
+                alert('로그인이 필요합니다.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // URL에서 게시글 ID 확인 (수정 모드)
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            if (postId) {
+                editMode = true;
+                editPostId = postId;
+                document.getElementById('page-title').textContent = '글 수정';
+                document.getElementById('submit-btn').textContent = '수정';
+                
+                // 기존 게시글 내용 불러오기
+                await loadPostForEdit(postId);
+            }
+        });
+
+        // 수정할 게시글 불러오기
+        async function loadPostForEdit(postId) {
+            try {
+                const { data: post, error } = await supabase
+                    .from('posts')
+                    .select('*')
+                    .eq('id', postId)
+                    .single();
+
+                if (error) throw error;
+
+                const user = await getCurrentUser();
+                if (post.author_id !== user.id) {
+                    alert('본인의 글만 수정할 수 있습니다.');
+                    window.location.href = 'board.html';
+                    return;
+                }
+
+                document.getElementById('post-title').value = post.title;
+                document.getElementById('post-content').value = post.content;
+            } catch (error) {
+                console.error('게시글 로딩 실패:', error);
+                alert('게시글을 불러오는데 실패했습니다.');
+                window.location.href = 'board.html';
+            }
+        }
+
+        // 폼 제출
+        async function submitPost(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('post-title').value.trim();
+            const content = document.getElementById('post-content').value.trim();
+
+            if (!title || !content) {
+                alert('제목과 내용을 모두 입력해주세요.');
+                return;
+            }
+
+            if (editMode) {
+                // 수정 모드
+                await updatePost(editPostId, title, content);
+            } else {
+                // 작성 모드
+                await createPost(title, content);
+            }
+        }
+    </script>
+</body>
+</html>
